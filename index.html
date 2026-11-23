@@ -6,8 +6,8 @@
 <title>فروش لپتاپ | فروشگاه لپ‌تاپ</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#EEF1F5;--card:#fff;--ink:#1B2230;--mute:#667085;--line:#D9DFE8;--acc:#1F4BFF;--acc-ink:#fff}
-@media (prefers-color-scheme:dark){:root{--bg:#12161D;--card:#1B212B;--ink:#EAEEF5;--mute:#98A2B3;--line:#2B3342;--acc:#6F8CFF;--acc-ink:#0B1020}}
+:root{--bg:#E9EEF6;--card:#fff;--ink:#0B1B3A;--mute:#667085;--line:#D9DFE8;--acc:#14284B;--acc-ink:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#0A1224;--card:#111B33;--ink:#EAEEF5;--mute:#98A2B3;--line:#23325A;--acc:#8FB0F5;--acc-ink:#0A1330}}
 *{box-sizing:border-box}
 body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;background:var(--bg);color:var(--ink);line-height:1.8}
 button,input,select{font:inherit;color:inherit}
@@ -22,103 +22,17 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
 .lap{width:100%;max-width:340px;margin:auto}
 .lap .scr{aspect-ratio:16/10;border:6px solid #2A303C;border-radius:10px 10px 0 0;background:linear-gradient(135deg,var(--c1,#1F4BFF),var(--c2,#0B1E6B))}
 .lap .base{height:10px;background:#2A303C;border-radius:0 0 14px 14px;width:112%;margin:0 -6%}
+.hero-img{width:100%;max-width:560px;margin:auto;display:block;border-radius:18px;border:1px solid var(--line)}
 .tools{display:flex;flex-wrap:wrap;gap:10px;padding:0 5vw 20px}
 .tools input,.tools select{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
 .tools input{flex:1;min-width:180px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;padding:0 5vw 48px}
 .p{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px}
 .p .lap{max-width:200px;margin-bottom:10px}
+.pic{width:100%;aspect-ratio:16/10;object-fit:contain;margin-bottom:10px;border-radius:8px;background:#fff}
 .p h3{margin:0;font-size:1.05rem}
 .p small{color:var(--mute)}
 .price{font-weight:800;font-size:1.1rem;margin-top:auto}
 .p button{background:var(--acc);color:var(--acc-ink);border:0;border-radius:10px;padding:8px;cursor:pointer;font-weight:600}
 #drawer{position:fixed;inset:0 auto 0 0;width:min(360px,100%);background:var(--card);border-inline-end:1px solid var(--line);transform:translateX(-102%);transition:transform .25s;z-index:10;padding:20px;display:flex;flex-direction:column}
 #drawer.open{transform:none}
-#items{flex:1;overflow:auto}
-.row{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
-.row button{background:none;border:0;color:var(--mute);cursor:pointer}
-.empty{color:var(--mute)}
-footer{text-align:center;color:var(--mute);padding:24px;border-top:1px solid var(--line)}
-@media(max-width:700px){.hero{grid-template-columns:1fr;padding-top:32px}}
-@media(prefers-reduced-motion:reduce){#drawer{transition:none}}
-</style>
-</head>
-<body>
-<header>
-  <div class="logo">فروش لپتاپ</div>
-  <button class="cart-btn" id="open">سبد خرید (<span id="count">0</span>)</button>
-</header>
-
-<section class="hero">
-  <div>
-    <h1>لپ‌تاپ مناسب کارت را پیدا کن</h1>
-    <p>از لپ‌تاپ دانشجویی تا گیمینگ و کاری. مشخصات واضح، قیمت شفاف و ضمانت اصالت کالا.</p>
-    <a href="#products">دیدن محصولات</a>
-  </div>
-  <div class="lap"><div class="scr"></div><div class="base"></div></div>
-</section>
-
-<div class="tools" id="products">
-  <input id="q" type="search" placeholder="جستجوی لپ‌تاپ..." aria-label="جستجو">
-  <select id="brand" aria-label="برند"><option value="">همه برندها</option></select>
-  <select id="sort" aria-label="مرتب‌سازی">
-    <option value="">مرتب‌سازی پیش‌فرض</option>
-    <option value="asc">ارزان‌ترین</option>
-    <option value="desc">گران‌ترین</option>
-  </select>
-</div>
-<main class="grid" id="grid"></main>
-
-<aside id="drawer" aria-label="سبد خرید">
-  <h2 style="margin-top:0">سبد خرید</h2>
-  <div id="items"></div>
-  <p><strong>جمع کل: <span id="total">0</span> تومان</strong></p>
-  <button class="cart-btn" id="close">بستن</button>
-</aside>
-
-<footer>© فروش لپتاپ، نمونه آموزشی</footer>
-
-<script>
-const products=[
- {id:1,name:"ایسوس Vivobook 15",brand:"ASUS",spec:"Core i5، رم ۱۶، SSD 512",price:28500000,c:["#1F4BFF","#0B1E6B"]},
- {id:2,name:"ایسوس ROG Strix G16",brand:"ASUS",spec:"Core i7، RTX 4060، رم ۱۶",price:78000000,c:["#FF3D5A","#4A0A1A"]},
- {id:3,name:"لنوو IdeaPad Slim 3",brand:"Lenovo",spec:"Ryzen 5، رم ۸، SSD 512",price:22000000,c:["#16A085","#073B31"]},
- {id:4,name:"لنوو ThinkPad E14",brand:"Lenovo",spec:"Core i7، رم ۱۶، SSD 1TB",price:52000000,c:["#444B5A","#12151C"]},
- {id:5,name:"اچ‌پی Pavilion 14",brand:"HP",spec:"Core i5، رم ۱۶، SSD 512",price:31000000,c:["#7B5CFF","#241A63"]},
- {id:6,name:"اپل MacBook Air M2",brand:"Apple",spec:"چیپ M2، رم ۸، SSD 256",price:65000000,c:["#F2A93B","#7A3E0B"]},
- {id:,name:"ماکروسافت MacBook Air M2",brand:"Apple",spec:"چیپ M2، رم ۸، SSD 256",price:65000000,c:["#F2A96B","#7A7E0B"]}
-];
-const cart={};
-const $=s=>document.querySelector(s);
-const fmt=n=>n.toLocaleString("fa-IR");
-[...new Set(products.map(p=>p.brand))].forEach(b=>$("#brand").insertAdjacentHTML("beforeend",`<option>${b}</option>`));
-
-function render(){
-  const q=$("#q").value.trim().toLowerCase(),b=$("#brand").value,s=$("#sort").value;
-  let list=products.filter(p=>(!b||p.brand===b)&&(!q||(p.name+p.brand).toLowerCase().includes(q)));
-  if(s)list.sort((x,y)=>s==="asc"?x.price-y.price:y.price-x.price);
-  $("#grid").innerHTML=list.length?list.map(p=>`
-    <article class="p">
-      <div class="lap" style="--c1:${p.c[0]};--c2:${p.c[1]}"><div class="scr"></div><div class="base"></div></div>
-      <small>${p.brand}</small><h3>${p.name}</h3><small>${p.spec}</small>
-      <div class="price">${fmt(p.price)} تومان</div>
-      <button onclick="add(${p.id})">افزودن به سبد</button>
-    </article>`).join(""):'<p class="empty">محصولی پیدا نشد. عبارت جستجو یا برند را تغییر بده.</p>';
-}
-function add(id){cart[id]=(cart[id]||0)+1;drawCart();$("#drawer").classList.add("open")}
-function remove(id){delete cart[id];drawCart()}
-function drawCart(){
-  const ids=Object.keys(cart);let total=0,count=0;
-  $("#items").innerHTML=ids.length?ids.map(i=>{
-    const p=products.find(x=>x.id==i),n=cart[i];total+=p.price*n;count+=n;
-    return `<div class="row"><span>${p.name} × ${fmt(n)}</span><span>${fmt(p.price*n)} <button onclick="remove(${p.id})" aria-label="حذف">✕</button></span></div>`;
-  }).join(""):'<p class="empty">سبد خرید خالی است. یک لپ‌تاپ به آن اضافه کن.</p>';
-  $("#total").textContent=fmt(total);$("#count").textContent=fmt(count);
-}
-["#q","#brand","#sort"].forEach(s=>$(s).addEventListener("input",render));
-$("#open").onclick=()=>$("#drawer").classList.add("open");
-$("#close").onclick=()=>$("#drawer").classList.remove("open");
-render();drawCart();
-</script>
-</body>
-</html>
